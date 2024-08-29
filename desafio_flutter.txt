@@ -1,0 +1,51 @@
+**Desafio Avançado de Desenvolvimento Flutter: Pokédex App com Clean Architecture, MobX e Mais**
+ 
+**Objetivo:**
+O objetivo deste desafio é avaliar suas habilidades avançadas de desenvolvimento em Flutter, incluindo o uso do Clean Architecture, o gerenciamento de estado com MobX, injeção de dependência com get_it, teste unitários abrangentes, criação de channels para comunicação nativa e a capacidade de controlar o uso de pacotes externos.
+ 
+**Requisitos:**
+ 
+1. **Estrutura do Projeto (Clean Architecture):**
+   - Implemente o aplicativo usando a estrutura do Clean Architecture, separando as camadas de apresentação, domínio e dados.
+   - Use Use Cases (Interactors) para gerenciar a lógica de negócios.
+   - Implemente repositórios para abstrair a obtenção de dados da API.
+ 
+2. **Gerenciamento de Estado (MobX):**
+   - Use o MobX para gerenciar o estado do aplicativo de forma eficiente.
+   - Utilize observables, actions e stores para controlar o estado dos componentes.
+ 
+3. **Injeção de Dependência (get_it):**
+   - Utilize o pacote `get_it` para realizar a injeção de dependência em todo o aplicativo.
+   - Garanta que as dependências sejam injetadas de forma correta e eficiente em diferentes camadas.
+ 
+4. **Consumo da API:**
+   - Utilize a API pública de Pokémons, por exemplo, a PokeAPI (https://pokeapi.co/), para obter os dados necessários.
+   - Implemente a lógica para buscar e mapear os dados da API de forma eficiente.
+ 
+5. **Testes Unitários:**
+   - Escreva testes unitários abrangentes para as diferentes camadas do aplicativo.
+   - Teste os casos de sucesso e os casos de erro, garantindo a robustez do código.
+ 
+6. **Criação de Channels:**
+   - Implemente um channel para comunicação com código nativo (por exemplo, Java/Kotlin para Android e Swift/Objective-C para iOS).
+   - O canal pode ser usado para funcionalidades específicas que exigem interação com APIs nativas.
+ 
+7. **Controle no Uso de Packages:**
+   - Certifique-se de que o uso de pacotes externos seja controlado e justificado.
+   - Evite a incorporação de muitos pacotes desnecessários.
+ 
+8. **Bônus (Opcional):**
+   - Implemente a funcionalidade de busca usando MobX e atualize a lista de pokémons em tempo real.
+   - Crie animações avançadas para melhorar a experiência do usuário.
+   - Implemente testes de widget para verificar a renderização correta da interface do usuário.
+ 
+**Instruções:**
+ 
+- Use o Flutter para desenvolver o aplicativo, seguindo as melhores práticas.
+- O código fonte do aplicativo deve ser armazenado em um repositório Git público (por exemplo, GitHub).
+- Forneça um arquivo README detalhado com instruções claras sobre como configurar, executar e testar o aplicativo.
+- Valorizamos a qualidade do código, a arquitetura, a organização e a estrutura do projeto.
+ 
+**Avaliação:**
+ 
+Serão avaliadas suas habilidades em Clean Architecture, MobX, injeção de dependência, teste unitário, criação de channels e escolha prudente no uso de pacotes externos. Além disso, a qualidade do código, a organização e a estrutura do projeto também serão consideradas. Este desafio é destinado a candidatos com um alto nível de experiência em desenvolvimento Flutter. Boa sorte!
