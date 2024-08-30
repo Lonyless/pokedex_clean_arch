@@ -31,14 +31,14 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.singleton<_i651.PokedexHttp>(() => _i651.PokedexHttp());
-    gh.lazySingleton<_i548.FetchPokemonBaseList>(
-        () => _i548.FetchPokemonBaseListImpl());
     gh.lazySingleton<_i752.PokemonDatasource>(
         () => _i752.PokemonDatasourceImpl(gh<_i651.PokedexHttp>()));
     gh.lazySingleton<_i674.PokemonRepository>(
         () => _i779.PokemonRepositoryImpl(gh<_i752.PokemonDatasource>()));
+    gh.lazySingleton<_i548.FetchPokemonBaseList>(
+        () => _i548.FetchPokemonBaseListImpl(gh<_i674.PokemonRepository>()));
     gh.factory<_i801.HomeStore>(
-        () => _i801.HomeStore(gh<_i674.PokemonRepository>()));
+        () => _i801.HomeStore(gh<_i548.FetchPokemonBaseList>()));
     return this;
   }
 }

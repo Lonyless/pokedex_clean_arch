@@ -4,6 +4,7 @@ import 'package:pokedex_clean_arch/core/enum/api_request_state.dart';
 import 'package:pokedex_clean_arch/core/failures/failure.dart';
 import 'package:pokedex_clean_arch/modules/home/domain/entities/pokemon_base_entity.dart';
 import 'package:pokedex_clean_arch/modules/home/domain/repositories/pokemon_repository.dart';
+import 'package:pokedex_clean_arch/modules/home/domain/usecases/fetch_pokemon_base_list.dart';
 
 part 'home_store.g.dart';
 
@@ -11,11 +12,11 @@ part 'home_store.g.dart';
 class HomeStore = HomeStoreBase with _$HomeStore;
 
 abstract class HomeStoreBase with Store {
-  HomeStoreBase(this._repository) {
+  FetchPokemonBaseList _useCase;
+
+  HomeStoreBase(this._useCase) {
     fetch();
   }
-
-  PokemonRepository _repository;
 
   @observable
   List<PokemonBaseEntity> pokemonBaseList = [];
@@ -33,7 +34,7 @@ abstract class HomeStoreBase with Store {
   Future<void> fetch() async {
     apiRequestState = ApiRequestState.loading;
 
-    final result = await _repository.fetchPokemonBaseList(pageNumber);
+    final result = await _useCase.fetchPokemonBaseList(pageNumber);
 
     result.fold(
       (l) {
