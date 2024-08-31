@@ -23,6 +23,7 @@ dependencies:
   dartz: ^0.10.1
   flutter_svg: ^2.0.10+1
   mockito: ^5.4.4
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +33,7 @@ dev_dependencies:
   mobx_codegen: ^2.6.1
   build_runner: ^2.4.12
   flutter_lints: ^4.0.0
+  test: ^1.25.7
 
 flutter:
 
