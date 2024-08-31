@@ -10,10 +10,9 @@ abstract class FetchPokemon {
 
 @LazySingleton(as: FetchPokemon)
 class FetchPokemonImpl implements FetchPokemon {
-  
   final PokemonRepository _repository;
-  
-  FetchPokemonImpl(this._repository)
+
+  FetchPokemonImpl(this._repository);
 
   @override
   Future<Either<Failure, PokemonEntity>> call(String name) async {
