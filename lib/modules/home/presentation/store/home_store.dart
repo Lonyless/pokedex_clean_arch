@@ -28,11 +28,11 @@ abstract class HomeStoreBase with Store {
   Failure? failure;
 
   @observable
-  int pageNumber = 1;
+  int pageNumber = 0;
 
   @action
   void nextPage() {
-    pageNumber = 1;
+    pageNumber += 1;
     fetch();
   }
 
