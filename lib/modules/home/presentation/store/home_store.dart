@@ -19,7 +19,7 @@ abstract class HomeStoreBase with Store {
   }
 
   @observable
-  List<PokemonBaseEntity> pokemonBaseList = [];
+  ObservableList<PokemonBaseEntity> pokemonBaseList = ObservableList();
 
   @observable
   ApiRequestState apiRequestState = ApiRequestState.initial;
@@ -29,6 +29,12 @@ abstract class HomeStoreBase with Store {
 
   @observable
   int pageNumber = 1;
+
+  @action
+  void nextPage() {
+    pageNumber = 1;
+    fetch();
+  }
 
   @action
   Future<void> fetch() async {
@@ -43,7 +49,7 @@ abstract class HomeStoreBase with Store {
       },
       (r) {
         apiRequestState = ApiRequestState.done;
-        pokemonBaseList = r;
+        pokemonBaseList.addAll(ObservableList.of(r));
       },
     );
   }

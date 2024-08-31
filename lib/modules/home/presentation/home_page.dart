@@ -25,6 +25,16 @@ class _HomePageState extends State<HomePage> {
     Color(0xff70B8C7),
   ];
 
+  late ScrollController scrollController = ScrollController()
+    ..addListener(() {
+      if (scrollController.position.atEdge) {
+        bool isBottom = scrollController.position.pixels != 0;
+        if (isBottom) {
+          homeStore.nextPage();
+        }
+      }
+    });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,62 +52,59 @@ class _HomePageState extends State<HomePage> {
         elevation: 22,
         shadowColor: Colors.black,
       ),
-      body: Observer(
-        builder: (context) {
-          if (homeStore.apiRequestState == ApiRequestState.loading) {
-            return CircularProgressIndicator();
-          }
-
-          if (homeStore.apiRequestState == ApiRequestState.done) {
-            return SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    Wrap(
-                      children: [
-                        for (final pokemon in homeStore.pokemonBaseList)
-                          Builder(
-                            builder: (context) {
-                              final color = colorList[Random().nextInt(4)].withOpacity(0.2);
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                                  decoration: BoxDecoration(
-                                    color: color,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Image.network(
-                                        "https://img.pokemondb.net/artwork/${pokemon.name}.jpg",
-                                        width: MediaQuery.of(context).size.width * 0.2,
-                                        height: MediaQuery.of(context).size.width * 0.2,
-                                        colorBlendMode: BlendMode.multiply,
-                                        color: color,
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Text(
-                                        pokemon.name,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
+      body: SingleChildScrollView(
+        controller: scrollController,
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 16),
+              Observer(
+                builder: (context) {
+                  return Wrap(
+                    children: [
+                      for (final pokemon in homeStore.pokemonBaseList)
+                        Builder(
+                          builder: (context) {
+                            final color = colorList[Random().nextInt(4)].withOpacity(0.2);
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                decoration: BoxDecoration(
+                                  color: color,
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                              );
-                            },
-                          ),
-                      ],
-                    ),
-                  ],
-                ),
+                                child: Column(
+                                  children: [
+                                    Image.network(
+                                      "https://img.pokemondb.net/artwork/${pokemon.name}.jpg",
+                                      width: MediaQuery.of(context).size.width * 0.2,
+                                      height: MediaQuery.of(context).size.width * 0.2,
+                                      colorBlendMode: BlendMode.multiply,
+                                      color: color,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      pokemon.name,
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                    ],
+                  );
+                },
               ),
-            );
-          }
-
-          return SizedBox();
-        },
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 24),
+                child: CircularProgressIndicator(),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

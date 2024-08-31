@@ -13,13 +13,13 @@ mixin _$HomeStore on HomeStoreBase, Store {
       Atom(name: 'HomeStoreBase.pokemonBaseList', context: context);
 
   @override
-  List<PokemonBaseEntity> get pokemonBaseList {
+  ObservableList<PokemonBaseEntity> get pokemonBaseList {
     _$pokemonBaseListAtom.reportRead();
     return super.pokemonBaseList;
   }
 
   @override
-  set pokemonBaseList(List<PokemonBaseEntity> value) {
+  set pokemonBaseList(ObservableList<PokemonBaseEntity> value) {
     _$pokemonBaseListAtom.reportWrite(value, super.pokemonBaseList, () {
       super.pokemonBaseList = value;
     });
@@ -79,6 +79,20 @@ mixin _$HomeStore on HomeStoreBase, Store {
   @override
   Future<void> fetch() {
     return _$fetchAsyncAction.run(() => super.fetch());
+  }
+
+  late final _$HomeStoreBaseActionController =
+      ActionController(name: 'HomeStoreBase', context: context);
+
+  @override
+  dynamic nextPage() {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.nextPage');
+    try {
+      return super.nextPage();
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
