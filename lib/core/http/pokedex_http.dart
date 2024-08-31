@@ -3,15 +3,15 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class PokedexHttp {
-  final Dio dio;
+  final Dio dio = Dio();
 
-  const PokedexHttp(this.dio);
+  PokedexHttp();
 
   Future<Response> post() async {
     throw UnimplementedError();
   }
 
-  Future<Response> get(String path, Map<String, dynamic> queryParameteres) async {
+  Future<Response> get(String path, {Map<String, dynamic>? queryParameteres}) async {
     return await dio.get(path, queryParameters: queryParameteres);
   }
 
