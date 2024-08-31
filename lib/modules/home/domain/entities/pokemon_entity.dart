@@ -1,7 +1,13 @@
 class PokemonEntity {
-  final double hp;
-  final double attack;
-  final double defense;
+  final String name;
+  final int hp;
+  final int attack;
+  final int defense;
 
-  PokemonEntity({required this.hp, required this.attack, required this.defense});
+  PokemonEntity({
+    required this.name,
+    required this.hp,
+    required this.attack,
+    required this.defense,
+  });
 }
