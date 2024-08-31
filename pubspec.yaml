@@ -18,11 +18,17 @@ dependencies:
   flutter_native_splash: ^2.4.1
   cupertino_icons: ^1.0.8
   mobx: ^2.3.3+2
+  flutter_mobx: ^2.2.1+1
+  google_fonts: ^6.2.1
+  dartz: ^0.10.1
+  flutter_svg: ^2.0.10+1
+  mockito: ^5.4.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  injectable_generator: ^2.6.2
   mobx_codegen: ^2.6.1
   build_runner: ^2.4.12
   flutter_lints: ^4.0.0
