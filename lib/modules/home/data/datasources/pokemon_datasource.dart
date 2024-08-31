@@ -17,9 +17,12 @@ class PokemonDatasourceImpl implements PokemonDatasource {
 
   @override
   Future<List<PokemonBaseEntity>> fetchPokemonBaseList(int pageNumber) async {
-    final response = await _client.get("https://pokeapi.co/api/v2/pokemon", {'offset': pageNumber * 20});
+    return await RequestSendAdapter.guard(() async {
+      final response = await _client.get("https://pokeapi.co/api/v2/pokemon", {
+        'offset': pageNumber * 40,
+        'limit': 40,
+      });
 
-    return await RequestSendAdapter.guard(() {
       if (response.statusCode == 200 && response.data['results'] != null) {
         return response.data['results'].map<PokemonBaseModel>((e) => PokemonBaseModel.fromMap(e)).toList();
       } else {
