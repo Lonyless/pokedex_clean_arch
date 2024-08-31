@@ -17,7 +17,7 @@ class RequestSendAdapter {
         }
       }
 
-      throw ServerException(message);
+      throw ServerException(message: message, statusCode: e.response?.statusCode);
     }
   }
 }
