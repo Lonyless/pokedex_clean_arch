@@ -1,2 +1,2 @@
 
-![cobertura dos testes](image.png)
+![cobertura dos testes](coverage.png)
