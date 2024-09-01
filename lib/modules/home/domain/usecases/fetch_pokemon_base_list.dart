@@ -5,7 +5,7 @@ import 'package:pokedex_clean_arch/modules/home/domain/entities/pokemon_base_ent
 import 'package:pokedex_clean_arch/modules/home/domain/repositories/pokemon_repository.dart';
 
 abstract class FetchPokemonBaseList {
-  Future<Either<Failure, List<PokemonBaseEntity>>> fetchPokemonBaseList(int pageNumber);
+  Future<Either<Failure, List<PokemonBaseEntity>>> call(int pageNumber);
 }
 
 @LazySingleton(as: FetchPokemonBaseList)
@@ -15,7 +15,7 @@ class FetchPokemonBaseListImpl implements FetchPokemonBaseList {
   const FetchPokemonBaseListImpl(this._repository);
 
   @override
-  Future<Either<Failure, List<PokemonBaseEntity>>> fetchPokemonBaseList(int pageNumber) async {
+  Future<Either<Failure, List<PokemonBaseEntity>>> call(int pageNumber) async {
     return await _repository.fetchPokemonBaseList(pageNumber);
   }
 }
