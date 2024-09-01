@@ -24,6 +24,14 @@ class _SearchButtonState extends State<SearchButton> with TickerProviderStateMix
   Timer? _debounce;
 
   @override
+  void dispose() {
+    _controller.dispose();
+    focusNode.dispose();
+    _debounce?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
