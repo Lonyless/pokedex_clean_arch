@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pokedex_clean_arch/core/errors/server_exception.dart';
 import 'package:pokedex_clean_arch/core/failures/failure.dart';
-import 'package:pokedex_clean_arch/core/failures/server_failure.dart';
 import 'package:pokedex_clean_arch/modules/home/data/datasources/pokemon_datasource.dart';
 import 'package:pokedex_clean_arch/modules/home/domain/entities/pokemon_base_entity.dart';
 import 'package:pokedex_clean_arch/modules/home/domain/entities/pokemon_entity.dart';
