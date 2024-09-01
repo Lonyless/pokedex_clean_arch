@@ -6,7 +6,7 @@ import 'package:pokedex_clean_arch/modules/home/presentation/widgets/dialog_poke
 
 void main() {
   testWidgets(
-    'description',
+    'Deve renderizar corretamente',
     (tester) async {
       tester.view.physicalSize = const Size(1400, 2080);
 
