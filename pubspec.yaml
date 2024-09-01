@@ -21,7 +21,6 @@ dependencies:
   flutter_mobx: ^2.2.1+1
   google_fonts: ^6.2.1
   dartz: ^0.10.1
-  flutter_svg: ^2.0.10+1
   equatable: ^2.0.5
 
 dev_dependencies:
