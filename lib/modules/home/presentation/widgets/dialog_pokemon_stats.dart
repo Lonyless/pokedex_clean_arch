@@ -26,7 +26,7 @@ class DialogPokemonStats extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           return Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(22),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: Theme.of(context).colorScheme.surface,
@@ -75,7 +75,6 @@ class DialogPokemonStats extends StatelessWidget {
                   decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(6)),
                   width: (constraints.maxWidth * pokemon.defense) / 100,
                 ),
-                const SizedBox(height: 12),
               ],
             ),
           );
