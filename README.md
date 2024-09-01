@@ -1,5 +1,5 @@
 # Pokedex clean arch
 
-Aplicativo criando com auxilio da https://pokeapi.co/.
+Pokedex com funcionalidade de listagem e busca. Consome a https://pokeapi.co/.
 
 ![cobertura dos testes](coverage.png)
