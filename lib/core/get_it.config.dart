@@ -15,8 +15,10 @@ import '../modules/home/data/datasources/pokemon_datasource.dart' as _i752;
 import '../modules/home/data/repositories/pokemon_repository_impl.dart'
     as _i779;
 import '../modules/home/domain/repositories/pokemon_repository.dart' as _i674;
+import '../modules/home/domain/usecases/fetch_pokemon.dart' as _i64;
 import '../modules/home/domain/usecases/fetch_pokemon_base_list.dart' as _i548;
 import '../modules/home/presentation/store/home_store.dart' as _i801;
+import '../modules/home/presentation/store/search_pokemon_store.dart' as _i927;
 import 'http/pokedex_http.dart' as _i651;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -39,6 +41,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i548.FetchPokemonBaseListImpl(gh<_i674.PokemonRepository>()));
     gh.factory<_i801.HomeStore>(
         () => _i801.HomeStore(gh<_i548.FetchPokemonBaseList>()));
+    gh.lazySingleton<_i64.FetchPokemon>(
+        () => _i64.FetchPokemonImpl(gh<_i674.PokemonRepository>()));
+    gh.factory<_i927.SearchPokemonStore>(
+        () => _i927.SearchPokemonStore(gh<_i64.FetchPokemon>()));
     return this;
   }
 }
