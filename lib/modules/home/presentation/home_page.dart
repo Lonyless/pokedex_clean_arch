@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_svg/svg.dart';
-import 'dart:math';
-import 'package:pokedex_clean_arch/core/enum/api_request_state.dart';
 
 import 'package:pokedex_clean_arch/core/get_it.dart';
 import 'package:pokedex_clean_arch/modules/home/presentation/store/home_store.dart';
@@ -18,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final homeStore = getIt.get<HomeStore>();
+  final homeStore = getIt.get<HomeStore>()..fetch();
   final seachPokemonStore = getIt.get<SearchPokemonStore>();
 
   late ScrollController scrollController = ScrollController()

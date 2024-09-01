@@ -13,9 +13,7 @@ class HomeStore = HomeStoreBase with _$HomeStore;
 abstract class HomeStoreBase with Store {
   final FetchPokemonBaseList _fetchPokemonBaseList;
 
-  HomeStoreBase(this._fetchPokemonBaseList) {
-    fetch();
-  }
+  HomeStoreBase(this._fetchPokemonBaseList);
 
   @observable
   ObservableList<PokemonBaseEntity> pokemonBaseList = ObservableList();
