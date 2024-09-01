@@ -1,4 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:pokedex_clean_arch/core/get_it.dart';
+import 'package:pokedex_clean_arch/modules/home/presentation/store/search_pokemon_store.dart';
+import 'package:pokedex_clean_arch/modules/home/presentation/widgets/dialog_pokemon_stats.dart';
 
 class SearchButton extends StatefulWidget {
   const SearchButton({super.key});
@@ -8,11 +13,15 @@ class SearchButton extends StatefulWidget {
 }
 
 class _SearchButtonState extends State<SearchButton> with TickerProviderStateMixin {
-  late final _controller = AnimationController(vsync: this, value: 0, duration: Duration(milliseconds: 500));
+  late final _controller = AnimationController(vsync: this, value: 0, duration: const Duration(milliseconds: 500));
+
+  final focusNode = FocusNode();
 
   double width = 0;
 
   bool showing = false;
+
+  Timer? _debounce;
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +38,34 @@ class _SearchButtonState extends State<SearchButton> with TickerProviderStateMix
               color: Theme.of(context).colorScheme.onPrimary,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Padding(
-              padding: EdgeInsets.only(bottom: 10, left: 12),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10, left: 12),
               child: TextField(
-                style: TextStyle(decorationThickness: 0),
-                decoration: InputDecoration(
+                focusNode: focusNode,
+                style: const TextStyle(decorationThickness: 0),
+                decoration: const InputDecoration(
                   border: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
                 ),
+                onChanged: (value) async {
+                  if (_debounce?.isActive ?? false) _debounce?.cancel();
+
+                  _debounce = Timer(const Duration(milliseconds: 500), () async {
+                    if (value.isEmpty) return;
+
+                    final result = await getIt.get<SearchPokemonStore>().getPokemon(value);
+
+                    result.fold(
+                      (failure) {},
+                      (pokemon) {
+                        DialogPokemonStats.show(context, pokemon);
+                      },
+                    );
+                  });
+                },
               ),
             ),
           ),
@@ -56,9 +82,11 @@ class _SearchButtonState extends State<SearchButton> with TickerProviderStateMix
                 if (showing) {
                   showing = false;
                   _controller.reverse();
+                  focusNode.unfocus();
                 } else {
                   showing = true;
                   _controller.forward();
+                  focusNode.requestFocus();
                 }
               });
             },
