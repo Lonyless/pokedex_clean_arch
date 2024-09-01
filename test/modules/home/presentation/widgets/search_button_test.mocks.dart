@@ -3,14 +3,15 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:mobx/mobx.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:pokedex_clean_arch/core/failures/failure.dart' as _i6;
+import 'package:pokedex_clean_arch/core/enum/api_request_state.dart' as _i5;
+import 'package:pokedex_clean_arch/core/failures/failure.dart' as _i7;
 import 'package:pokedex_clean_arch/modules/home/domain/entities/pokemon_entity.dart'
-    as _i7;
+    as _i8;
 import 'package:pokedex_clean_arch/modules/home/presentation/store/search_pokemon_store.dart'
     as _i4;
 
@@ -58,6 +59,21 @@ class MockSearchPokemonStore extends _i1.Mock
   }
 
   @override
+  _i5.ApiRequestState get apiRequestState => (super.noSuchMethod(
+        Invocation.getter(#apiRequestState),
+        returnValue: _i5.ApiRequestState.initial,
+      ) as _i5.ApiRequestState);
+
+  @override
+  set apiRequestState(_i5.ApiRequestState? value) => super.noSuchMethod(
+        Invocation.setter(
+          #apiRequestState,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i2.ReactiveContext get context => (super.noSuchMethod(
         Invocation.getter(#context),
         returnValue: _FakeReactiveContext_0(
@@ -67,7 +83,7 @@ class MockSearchPokemonStore extends _i1.Mock
       ) as _i2.ReactiveContext);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.PokemonEntity>> getPokemon(
+  _i6.Future<_i3.Either<_i7.Failure, _i8.PokemonEntity>> getPokemon(
           String? name) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -75,13 +91,13 @@ class MockSearchPokemonStore extends _i1.Mock
           [name],
         ),
         returnValue:
-            _i5.Future<_i3.Either<_i6.Failure, _i7.PokemonEntity>>.value(
-                _FakeEither_1<_i6.Failure, _i7.PokemonEntity>(
+            _i6.Future<_i3.Either<_i7.Failure, _i8.PokemonEntity>>.value(
+                _FakeEither_1<_i7.Failure, _i8.PokemonEntity>(
           this,
           Invocation.method(
             #getPokemon,
             [name],
           ),
         )),
-      ) as _i5.Future<_i3.Either<_i6.Failure, _i7.PokemonEntity>>);
+      ) as _i6.Future<_i3.Either<_i7.Failure, _i8.PokemonEntity>>);
 }

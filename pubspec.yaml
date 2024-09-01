@@ -22,6 +22,7 @@ dependencies:
   google_fonts: ^6.2.1
   dartz: ^0.10.1
   equatable: ^2.0.5
+  shimmer_effect: ^1.0.4
 
 dev_dependencies:
   flutter_test:

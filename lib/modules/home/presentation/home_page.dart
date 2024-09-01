@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pokedex_clean_arch/core/enum/api_request_state.dart';
 
 import 'package:pokedex_clean_arch/core/get_it.dart';
 import 'package:pokedex_clean_arch/modules/home/presentation/store/home_store.dart';
 import 'package:pokedex_clean_arch/modules/home/presentation/store/search_pokemon_store.dart';
 import 'package:pokedex_clean_arch/modules/home/presentation/widgets/dialog_pokemon_stats.dart';
 import 'package:pokedex_clean_arch/modules/home/presentation/widgets/search_button.dart';
+import 'package:shimmer_effect/shimmer_effect.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,9 +40,7 @@ class _HomePageState extends State<HomePage> {
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
         ),
-        actions: [
-          SearchButton(),
-        ],
+        actions: const [SearchButton()],
         backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 22,
         shadowColor: Colors.black,
@@ -56,51 +56,72 @@ class _HomePageState extends State<HomePage> {
                   return Wrap(
                     children: [
                       for (final pokemon in homeStore.pokemonBaseList)
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: InkWell(
-                            onTap: () async {
-                              final result = await seachPokemonStore.getPokemon(pokemon.name);
+                        Builder(
+                          builder: (context) {
+                            final seachPokemonStore = getIt.get<SearchPokemonStore>();
 
-                              result.fold(
-                                (failure) {},
-                                (pokemon) {
-                                  DialogPokemonStats.show(context, pokemon);
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () async {
+                                  final result = await seachPokemonStore.getPokemon(pokemon.name);
+
+                                  result.fold(
+                                    (failure) {},
+                                    (pokemon) {
+                                      DialogPokemonStats.show(context, pokemon);
+                                    },
+                                  );
                                 },
-                              );
-                            },
-                            child: Material(
-                              elevation: 8,
-                              borderRadius: BorderRadius.circular(12),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.withOpacity(0.1),
+                                child: Material(
+                                  elevation: 8,
                                   borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Hero(
-                                      tag: 'pokemon-${pokemon.name}',
-                                      child: Image.network(
-                                        "https://img.pokemondb.net/artwork/${pokemon.name}.jpg",
-                                        width: MediaQuery.of(context).size.width * 0.2,
-                                        height: MediaQuery.of(context).size.width * 0.2,
-                                        fit: BoxFit.scaleDown,
-                                        colorBlendMode: BlendMode.multiply,
-                                        color: Colors.grey.withOpacity(0.1),
-                                      ),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(12),
                                     ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      pokemon.name,
-                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                    child: Column(
+                                      children: [
+                                        Hero(
+                                          tag: 'pokemon-${pokemon.name}',
+                                          child: Image.network(
+                                            "https://img.pokemondb.net/artwork/${pokemon.name}.jpg",
+                                            width: MediaQuery.of(context).size.width * 0.2,
+                                            height: MediaQuery.of(context).size.width * 0.2,
+                                            fit: BoxFit.scaleDown,
+                                            colorBlendMode: BlendMode.multiply,
+                                            color: Colors.grey.withOpacity(0.1),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Observer(
+                                          builder: (context) {
+                                            if (seachPokemonStore.apiRequestState == ApiRequestState.loading) {
+                                              return ShimmerEffect(
+                                                baseColor: Colors.grey,
+                                                highlightColor: Colors.transparent,
+                                                child: Text(
+                                                  pokemon.name,
+                                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                                ),
+                                              );
+                                            }
+
+                                            return Text(
+                                              pokemon.name,
+                                              style: const TextStyle(fontWeight: FontWeight.bold),
+                                            );
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                     ],
                   );

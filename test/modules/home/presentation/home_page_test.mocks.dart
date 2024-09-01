@@ -170,6 +170,21 @@ class MockSearchPokemonStore extends _i1.Mock
   }
 
   @override
+  _i6.ApiRequestState get apiRequestState => (super.noSuchMethod(
+        Invocation.getter(#apiRequestState),
+        returnValue: _i6.ApiRequestState.initial,
+      ) as _i6.ApiRequestState);
+
+  @override
+  set apiRequestState(_i6.ApiRequestState? value) => super.noSuchMethod(
+        Invocation.setter(
+          #apiRequestState,
+          value,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i2.ReactiveContext get context => (super.noSuchMethod(
         Invocation.getter(#context),
         returnValue: _FakeReactiveContext_1(
