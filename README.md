@@ -14,6 +14,10 @@ dartz: Facilitar programação funcional para melhorar legibilidade do código <
 equatable: Auxiliar na comparação de objetos <br/>
 shimmer_effect: Efeito de carregamento <br/>
 
+# Instalação
+
+Instalar o APK da pasta "bin" e verificar se a funcionalidade de listagem e busca estão funcionando corretamente.
+
 # Coverage
 
 ![cobertura dos testes](coverage.png)
